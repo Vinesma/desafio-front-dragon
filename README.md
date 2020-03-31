@@ -18,7 +18,7 @@ Os seguintes dados devem ser apresentados na página:
 
 ### Regras:
 - Layout responsivo;
-- Utilizar Angular 4+ para o desenvolvimento;
+- Utilizar React ou Angular 4+ para o desenvolvimento;
 - Usar um sistema de controle de versão para entregar o teste (Github, Bitbucket, ...)
 - O uso de libs é livre.
 

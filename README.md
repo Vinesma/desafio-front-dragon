@@ -13,7 +13,7 @@ Os seguintes dados devem ser apresentados na página:
 	- Data de criação;
 	- Nome;
 	- Tipo;
-  
+
 ## Uma página para cadastro de dragões:
 
 ### Regras:

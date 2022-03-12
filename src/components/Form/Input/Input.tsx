@@ -8,9 +8,16 @@ const Wrapper = styled.div`
 `;
 
 const StyledInput = styled.input`
-    padding: 0.4rem 0.5rem;
-    border: 1px solid blanchedalmond;
+    padding: 0.5rem 0.6rem;
+    border: 1px solid ${props => props.theme.color.neutral.gray.light};
     border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.9rem;
+
+    &:focus-visible,
+    &:focus-within {
+        outline: 1px solid ${props => props.theme.color.secondary.light};
+    }
 `;
 
 interface PropsType extends React.InputHTMLAttributes<HTMLInputElement> {

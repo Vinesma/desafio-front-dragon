@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-export const InputGroup = styled.div<{ row?: boolean }>`
+export const ButtonGroup = styled.div<{ column?: boolean }>`
     margin-bottom: 1.4rem;
-    display: ${props => (props.row ? "flex" : "grid")};
+    display: ${props => (props.column ? "grid" : "flex")};
     grid-template-columns: 1fr;
     grid-auto-rows: auto;
     gap: 1rem;

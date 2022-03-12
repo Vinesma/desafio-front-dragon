@@ -1,13 +1,15 @@
+import Button from "components/Form/Button";
 import Input from "components/Form/Input";
 import useLoginState from "./hooks/useLoginState";
-import { InnerWrapper, Wrapper } from "./styles";
+import { Form, Wrapper } from "./styles";
 
 const Login = () => {
-    const [emailProps, passwordProps] = useLoginState();
+    const [emailProps, passwordProps, { invalidLogin }, { goToDragonList }] =
+        useLoginState();
 
     return (
         <Wrapper>
-            <InnerWrapper>
+            <Form onSubmit={goToDragonList}>
                 <Input.Group>
                     <Input
                         id="emailInput"
@@ -24,7 +26,13 @@ const Login = () => {
                         {...passwordProps}
                     />
                 </Input.Group>
-            </InnerWrapper>
+                <Button.Group>
+                    <Button displayType="SECONDARY" type="submit">
+                        Login
+                    </Button>
+                </Button.Group>
+                {invalidLogin && <p>Invalid login! Please try again.</p>}
+            </Form>
         </Wrapper>
     );
 };

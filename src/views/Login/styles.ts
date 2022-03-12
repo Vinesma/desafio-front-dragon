@@ -11,11 +11,11 @@ export const Wrapper = styled.main`
     background-repeat: no-repeat;
 `;
 
-export const InnerWrapper = styled.div`
+export const Form = styled.form`
     grid-column: 2;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: white;
+    background-color: ${props => props.theme.color.neutral.gray.light};
 `;

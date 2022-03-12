@@ -24,6 +24,14 @@ const StyledButton = styled.button<{ displayType: ButtonType }>`
     font-weight: bold;
     cursor: pointer;
     font-family: inherit;
+
+    &:focus-within {
+        outline: 1px solid
+            ${({ theme, displayType }) =>
+                displayType === "PRIMARY"
+                    ? theme.color.primary.light
+                    : theme.color.secondary.main};
+    }
 `;
 
 const Button: React.FC<PropsType> = ({

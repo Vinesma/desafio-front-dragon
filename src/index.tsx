@@ -4,7 +4,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "styled-components";
 import { defaultTheme, GlobalStyle } from "theme";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Login from "views/Login";
 import DragonList from "views/DragonList";
 import DragonDetail from "views/DragonDetail";
@@ -14,7 +14,7 @@ ReactDOM.render(
     <React.StrictMode>
         <ThemeProvider theme={defaultTheme}>
             <GlobalStyle />
-            <BrowserRouter>
+            <HashRouter>
                 <Routes>
                     <Route path="/" element={<App />}>
                         <Route index element={<Login />} />
@@ -37,7 +37,7 @@ ReactDOM.render(
                         />
                     </Route>
                 </Routes>
-            </BrowserRouter>
+            </HashRouter>
         </ThemeProvider>
     </React.StrictMode>,
     document.getElementById("root")

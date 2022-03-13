@@ -2,8 +2,8 @@ import { baseUrl } from "api/routes";
 import { useCallback, useEffect, useState } from "react";
 
 interface Options extends RequestInit {
-    payload: any;
-    method: "GET" | "POST" | "PUT" | "PATCH";
+    payload?: any;
+    method: "GET" | "POST" | "PUT" | "DELETE";
 }
 type FetcherFunction = (url?: string, init?: Options) => Promise<void>;
 

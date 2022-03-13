@@ -4,7 +4,7 @@ import Heading from "components/Typography/Heading";
 import Text from "components/Typography/Text";
 import Dragon from "interfaces/Dragon";
 import useDragonCardState, { CardMode } from "./hooks/useDragonCardState";
-import { Form, Wrapper } from "./styles";
+import { AlignedWrapper, Form, Wrapper } from "./styles";
 import { datePrettifier } from "./utils/date";
 
 interface PropsType {
@@ -22,7 +22,15 @@ const DragonCard: React.FC<PropsType> = ({
         nameInputProps,
         typeInputProps,
         { goToDragonDetail, goToDragonList },
-        { currentMode, setCardMode, setCardToDefaultMode, editDragon },
+        {
+            currentMode,
+            setCardMode,
+            setCardToDefaultMode,
+            isRemoving,
+            toggleRemoveMode,
+            editDragon,
+            removeDragon,
+        },
     ] = useDragonCardState(dragon, mode);
 
     const dragonInfo = (
@@ -113,7 +121,29 @@ const DragonCard: React.FC<PropsType> = ({
                         >
                             Details
                         </Button>
-                        <Button displayType="TERTIARY">Remove</Button>
+                        {isRemoving ? (
+                            <AlignedWrapper>
+                                <Text>Remove?</Text>
+                                <Button
+                                    onClick={() =>
+                                        removeDragon(
+                                            dragon.id,
+                                            onSuccessfulModification
+                                        )
+                                    }
+                                >
+                                    Yes
+                                </Button>
+                                <Button onClick={toggleRemoveMode}>No</Button>
+                            </AlignedWrapper>
+                        ) : (
+                            <Button
+                                displayType="TERTIARY"
+                                onClick={toggleRemoveMode}
+                            >
+                                Remove
+                            </Button>
+                        )}
                     </Button.Group>
                 </Wrapper>
             );

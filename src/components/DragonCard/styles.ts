@@ -32,3 +32,9 @@ export const Form = styled.form`
         margin-bottom: 0;
     }
 `;
+
+export const AlignedWrapper = styled.span`
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+`;

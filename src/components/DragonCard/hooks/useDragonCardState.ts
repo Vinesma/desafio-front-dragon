@@ -12,6 +12,7 @@ export default function useDragonCardState(
 ) {
     const [name, setName] = useState(dragon.name);
     const [type, setType] = useState(dragon.type);
+    const [isRemoving, setIsRemoving] = useState(false);
     const [currentMode, setCurrentMode] = useState(
         cardMode ? cardMode : "VIEW"
     );
@@ -38,6 +39,10 @@ export default function useDragonCardState(
         setCurrentMode(defaultMode);
     }, [defaultMode]);
 
+    const toggleRemoveMode = useCallback(() => {
+        setIsRemoving(!isRemoving);
+    }, [isRemoving]);
+
     const editDragon = useCallback(
         async (
             dragonData: Pick<Dragon, "id" | "name" | "type">,
@@ -46,7 +51,7 @@ export default function useDragonCardState(
             try {
                 await API(`/${dragonData.id}`, {
                     method: "PUT",
-                    payload: dragonData,
+                    payload: { name: dragonData.name, type: dragonData.type },
                 });
                 setCardToDefaultMode();
                 onSuccessfulEdit && onSuccessfulEdit();
@@ -55,6 +60,19 @@ export default function useDragonCardState(
             }
         },
         [API, setCardToDefaultMode]
+    );
+
+    const removeDragon = useCallback(
+        async (dragonId: Dragon["id"], onSuccessfulRemove?: () => void) => {
+            try {
+                await API(`/${dragonId}`, { method: "DELETE" });
+                toggleRemoveMode();
+                onSuccessfulRemove && onSuccessfulRemove();
+            } catch (error) {
+                console.error(error);
+            }
+        },
+        [API, toggleRemoveMode]
     );
 
     return [
@@ -67,6 +85,14 @@ export default function useDragonCardState(
             onChange: (e: ChangeEvent) => setType(e.target.value),
         },
         { goToDragonDetail, goToDragonList },
-        { currentMode, setCardMode, setCardToDefaultMode, editDragon },
+        {
+            currentMode,
+            setCardMode,
+            setCardToDefaultMode,
+            isRemoving,
+            toggleRemoveMode,
+            editDragon,
+            removeDragon,
+        },
     ] as const;
 }

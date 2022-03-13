@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { ButtonGroup } from "./ButtonGroup";
 
-type ButtonType = "PRIMARY" | "SECONDARY";
+type ButtonType = "PRIMARY" | "SECONDARY" | "TERTIARY";
 
 interface PropsType extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     displayType?: ButtonType;
@@ -11,7 +11,7 @@ interface PropsType extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const StyledButton = styled.button<{ displayType: ButtonType }>`
     padding: 0.5rem 1rem;
     border: ${({ theme, displayType }) =>
-        displayType === "PRIMARY"
+        displayType === "PRIMARY" || displayType === "TERTIARY"
             ? "0"
             : `2px solid ${theme.color.secondary.main}`};
     border-radius: 8px;

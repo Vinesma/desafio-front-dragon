@@ -1,24 +1,37 @@
-import useFetch from "hooks/useFetch";
-import Dragon from "interfaces/Dragon";
-import { useEffect } from "react";
+import { ListHeader, Wrapper } from "./styles";
+import Heading from "components/Typography/Heading";
+import Button from "components/Form/Button";
+import DragonCard from "components/DragonCard";
+import Spinner from "components/Spinner";
+import useDragonListState from "./hooks/useDragonListState";
 
 const DragonList = () => {
-    const [API, { data, safeToRender }] = useFetch<Dragon[]>();
-
-    useEffect(() => {
-        API();
-    }, [API]);
+    const [{ data, loading, safeToRender }, { goToLogin, goToDragonCreation }] =
+        useDragonListState();
 
     return (
-        <div>
+        <Wrapper>
+            <ListHeader>
+                <Heading type="h3">Dragons</Heading>
+                <Button.Group>
+                    <Button onClick={goToDragonCreation}>Add Dragon</Button>
+                    <Button displayType="SECONDARY" onClick={goToLogin}>
+                        Logout
+                    </Button>
+                </Button.Group>
+            </ListHeader>
+            {loading && <Spinner />}
             {safeToRender &&
                 data?.map(dragon => (
-                    <>
-                        <h4>{dragon.name}</h4>
-                        <p>{dragon.type}</p>
-                    </>
+                    <DragonCard dragon={dragon}>
+                        <Button.Group align="start">
+                            <Button displayType="PRIMARY">Edit</Button>
+                            <Button displayType="SECONDARY">Details</Button>
+                            <Button displayType="TERTIARY">Remove</Button>
+                        </Button.Group>
+                    </DragonCard>
                 ))}
-        </div>
+        </Wrapper>
     );
 };
 

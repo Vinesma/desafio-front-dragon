@@ -1,6 +1,7 @@
 import Button from "components/Form/Button";
 import Input from "components/Form/Input";
 import Heading from "components/Typography/Heading";
+import Text from "components/Typography/Text";
 import useLoginState from "./hooks/useLoginState";
 import { Form, InnerWrapper, Wrapper } from "./styles";
 
@@ -35,7 +36,9 @@ const Login = () => {
                     <Button.Group>
                         <Button type="submit">Login</Button>
                     </Button.Group>
-                    {invalidLogin && <p>Invalid login! Please try again.</p>}
+                    {invalidLogin && (
+                        <Text center>Invalid login! Please try again.</Text>
+                    )}
                 </Form>
             </InnerWrapper>
         </Wrapper>

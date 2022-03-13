@@ -6,7 +6,13 @@ export const Wrapper = styled.main`
     grid-template-columns: 2fr 1fr;
     height: 100vh;
     width: 100vw;
-    background-image: url(${Background});
+    background-image: ${props => `
+        linear-gradient(
+            ${props.theme.color.secondary.light}22,
+            ${props.theme.color.secondary.light}aa
+        ),
+    `}
+        url(${Background});
     background-size: cover;
     background-repeat: no-repeat;
 `;
@@ -21,7 +27,6 @@ export const Form = styled.form`
     padding: 1.5rem;
     border-radius: 8px;
     background-color: ${props => props.theme.color.neutral.white};
-    box-shadow: 2px 1px 8px ${props => props.theme.color.neutral.gray.dark};
 
     & > *:last-child {
         margin-bottom: 0;

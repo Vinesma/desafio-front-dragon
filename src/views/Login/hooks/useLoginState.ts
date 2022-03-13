@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { users } from "db/users";
 import useGoToPage from "hooks/useGoToPage";
 
@@ -35,6 +35,12 @@ export default function useLoginState() {
         },
         [goToDragonList, email, password, loginIsValid]
     );
+
+    useEffect(() => {
+        if (localStorage.getItem("user") != null) {
+            goToDragonList();
+        }
+    }, [goToDragonList]);
 
     return [
         {

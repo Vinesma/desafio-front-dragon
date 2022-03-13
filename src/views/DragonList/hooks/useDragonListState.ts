@@ -23,7 +23,12 @@ export default function useDragonListState() {
     );
 
     const fetchNewDragons = useCallback(() => {
-        API();
+        const params = new URLSearchParams({
+            sortBy: "name",
+            order: "asc",
+        }).toString();
+
+        API(`?${params}`);
     }, [API]);
 
     useEffect(() => {

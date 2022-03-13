@@ -1,3 +1,7 @@
+# Credenciais De Acesso
+Email: user@dragonpal.com
+Senha: pass1
+
 # Objetivo
 Criar uma aplicação que contenha:
 ## Página de login:

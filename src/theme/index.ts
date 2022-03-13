@@ -36,4 +36,10 @@ export const defaultTheme: DefaultTheme = {
             },
         },
     },
+    breakpoints: {
+        desktopSmall: type =>
+            `(${type === "up" ? "min" : "max"}-width: 1000px)`,
+        tablet: type => `(${type === "up" ? "min" : "max"}-width: 810px)`,
+        mobile: type => `(${type === "up" ? "min" : "max"}-width: 480px)`,
+    },
 };

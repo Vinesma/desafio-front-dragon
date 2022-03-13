@@ -15,12 +15,20 @@ export const Wrapper = styled.main`
         url(${Background});
     background-size: cover;
     background-repeat: no-repeat;
+
+    @media ${props => props.theme.breakpoints.tablet("down")} {
+        background-position-x: left 20%;
+    }
 `;
 
 export const InnerWrapper = styled.div`
     grid-column: 2;
     display: grid;
     place-items: center;
+
+    @media ${props => props.theme.breakpoints.desktopSmall("down")} {
+        grid-column: 1 / -1;
+    }
 `;
 
 export const Form = styled.form`

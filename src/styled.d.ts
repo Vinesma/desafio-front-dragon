@@ -1,5 +1,7 @@
 import "styled-components";
 
+type MediaGeneratorFunction = (type: "up" | "down") => string;
+
 declare module "styled-components" {
     export interface DefaultTheme {
         color: {
@@ -19,6 +21,11 @@ declare module "styled-components" {
                     dark: string;
                 };
             };
+        };
+        breakpoints: {
+            desktopSmall: MediaGeneratorFunction;
+            tablet: MediaGeneratorFunction;
+            mobile: MediaGeneratorFunction;
         };
     }
 }

@@ -7,34 +7,38 @@ import useDragonListState from "./hooks/useDragonListState";
 
 const DragonList = () => {
     const [
-        { data, loading, safeToRender },
-        { goToLogin, goToDragonCreation },
-        { fetchNewDragons },
+        { data, loading, safeToRender, isLoggedIn },
+        { goToDragonCreation },
+        { fetchNewDragons, logout },
     ] = useDragonListState();
 
-    return (
-        <Wrapper>
-            <ListHeader>
-                <Heading type="h3">Dragons</Heading>
-                <Button.Group>
-                    <Button onClick={goToDragonCreation}>Add Dragon</Button>
-                    <Button displayType="SECONDARY" onClick={goToLogin}>
-                        Logout
-                    </Button>
-                </Button.Group>
-            </ListHeader>
-            {loading && <Spinner />}
-            {safeToRender &&
-                data?.map(dragon => (
-                    <DragonCard
-                        key={dragon.id}
-                        dragon={dragon}
-                        mode="VIEW"
-                        onSuccessfulModification={fetchNewDragons}
-                    />
-                ))}
-        </Wrapper>
-    );
+    if (isLoggedIn) {
+        return (
+            <Wrapper>
+                <ListHeader>
+                    <Heading type="h3">Dragons</Heading>
+                    <Button.Group>
+                        <Button onClick={goToDragonCreation}>Add Dragon</Button>
+                        <Button displayType="SECONDARY" onClick={logout}>
+                            Logout
+                        </Button>
+                    </Button.Group>
+                </ListHeader>
+                {loading && <Spinner />}
+                {safeToRender &&
+                    data?.map(dragon => (
+                        <DragonCard
+                            key={dragon.id}
+                            dragon={dragon}
+                            mode="VIEW"
+                            onSuccessfulModification={fetchNewDragons}
+                        />
+                    ))}
+            </Wrapper>
+        );
+    }
+
+    return null;
 };
 
 export default DragonList;

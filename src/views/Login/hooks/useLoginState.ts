@@ -26,6 +26,7 @@ export default function useLoginState() {
         (event: FormEvent) => {
             event.preventDefault();
             if (loginIsValid(email, password)) {
+                localStorage.setItem("user", email);
                 setInvalidLogin(false);
                 navigate("/dragons");
             } else {

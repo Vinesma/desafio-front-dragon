@@ -1,4 +1,5 @@
 import useFetch from "hooks/useFetch";
+import useProtectedRoute from "hooks/useProtectedRoute";
 import Dragon from "interfaces/Dragon";
 import { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -6,8 +7,10 @@ import { useNavigate } from "react-router-dom";
 export default function useDragonListState() {
     const [API, { data, loading, safeToRender }] = useFetch<Dragon[]>();
     const navigate = useNavigate();
+    const isLoggedIn = useProtectedRoute();
 
-    const goToLogin = useCallback(() => {
+    const logout = useCallback(() => {
+        localStorage.removeItem("user");
         navigate("/");
     }, [navigate]);
 
@@ -32,12 +35,14 @@ export default function useDragonListState() {
     }, [API]);
 
     useEffect(() => {
-        fetchNewDragons();
-    }, [fetchNewDragons]);
+        if (isLoggedIn) {
+            fetchNewDragons();
+        }
+    }, [fetchNewDragons, isLoggedIn]);
 
     return [
-        { data, loading, safeToRender },
-        { goToLogin, goToDragonCreation, goToDragonDetail },
-        { fetchNewDragons },
+        { data, loading, safeToRender, isLoggedIn },
+        { goToDragonCreation, goToDragonDetail },
+        { fetchNewDragons, logout },
     ] as const;
 }

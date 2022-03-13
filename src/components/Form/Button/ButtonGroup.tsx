@@ -7,4 +7,5 @@ export const ButtonGroup = styled.div<{ column?: boolean }>`
     grid-auto-rows: auto;
     gap: 1rem;
     flex-wrap: wrap;
+    justify-content: center;
 `;

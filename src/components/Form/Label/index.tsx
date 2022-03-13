@@ -9,6 +9,7 @@ const StyledLabel = styled.label`
     margin-bottom: 0.4rem;
     cursor: pointer;
     color: ${props => props.theme.color.secondary.main};
+    font-weight: bold;
     font-family: inherit;
     font-size: 1rem;
 `;

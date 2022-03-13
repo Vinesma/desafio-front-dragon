@@ -11,10 +11,19 @@ export const Wrapper = styled.main`
     background-repeat: no-repeat;
 `;
 
-export const Form = styled.form`
+export const InnerWrapper = styled.div`
     grid-column: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    display: grid;
+    place-items: center;
+`;
+
+export const Form = styled.form`
+    padding: 1.5rem;
+    border-radius: 8px;
+    background-color: ${props => props.theme.color.neutral.white};
+    box-shadow: 2px 1px 8px ${props => props.theme.color.neutral.gray.dark};
+
+    & > *:last-child {
+        margin-bottom: 0;
+    }
 `;

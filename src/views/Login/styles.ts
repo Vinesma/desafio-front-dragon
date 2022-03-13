@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Background from "assets/images/dragonSculpt.jpg";
+import Background from "assets/images/dragonBg.jpeg";
 
 export const Wrapper = styled.main`
     display: grid;
@@ -17,5 +17,4 @@ export const Form = styled.form`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: ${props => props.theme.color.neutral.gray.light};
 `;

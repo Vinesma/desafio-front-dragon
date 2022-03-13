@@ -1,8 +1,8 @@
 import Button from "components/Form/Button";
 import Input from "components/Form/Input";
-import Heading from "components/Typography/Heading";
 import Text from "components/Typography/Text";
 import Dragon from "interfaces/Dragon";
+import DragonInfo from "./components/DragonInfo";
 import useDragonCardState, { CardMode } from "./hooks/useDragonCardState";
 import { AlignedWrapper, Form, Wrapper } from "./styles";
 import { datePrettifier } from "./utils/date";
@@ -33,21 +33,11 @@ const DragonCard: React.FC<PropsType> = ({
         },
     ] = useDragonCardState(dragon, mode);
 
-    const dragonInfo = (
-        <>
-            <Heading colorType="SECONDARY" type="h4">
-                {dragon.name}
-            </Heading>
-            <Text>{dragon.type}</Text>
-            <Text>{datePrettifier(dragon.createdAt)}</Text>
-        </>
-    );
-
     switch (currentMode) {
         case "DETAILS":
             return (
                 <Wrapper>
-                    {dragonInfo}
+                    <DragonInfo dragon={dragon} />
                     <Button.Group align="start">
                         <Button
                             displayType="SECONDARY"
@@ -107,7 +97,7 @@ const DragonCard: React.FC<PropsType> = ({
         default:
             return (
                 <Wrapper>
-                    {dragonInfo}
+                    <DragonInfo dragon={dragon} />
                     <Button.Group align="start">
                         <Button
                             displayType="PRIMARY"

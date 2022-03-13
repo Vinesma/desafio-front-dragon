@@ -29,6 +29,7 @@ const DragonList = () => {
                     <DragonCard
                         key={dragon.id}
                         dragon={dragon}
+                        mode="VIEW"
                         onSuccessfulModification={fetchNewDragons}
                     />
                 ))}

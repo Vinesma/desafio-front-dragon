@@ -1,8 +1,11 @@
+import DragonCard from "components/DragonCard";
+import { Wrapper } from "./styles";
+
 const DragonCreate = () => {
     return (
-        <div>
-            <p>DragonCreate</p>
-        </div>
+        <Wrapper>
+            <DragonCard mode="CREATE" />
+        </Wrapper>
     );
 };
 

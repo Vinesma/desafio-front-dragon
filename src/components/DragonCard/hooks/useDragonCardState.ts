@@ -3,15 +3,15 @@ import Dragon from "interfaces/Dragon";
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export type CardMode = "VIEW" | "EDIT" | "DETAILS";
+export type CardMode = "VIEW" | "EDIT" | "DETAILS" | "CREATE";
 type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
 export default function useDragonCardState(
-    dragon: Dragon,
+    dragon?: Dragon,
     cardMode?: CardMode
 ) {
-    const [name, setName] = useState(dragon.name);
-    const [type, setType] = useState(dragon.type);
+    const [name, setName] = useState(dragon ? dragon.name : "");
+    const [type, setType] = useState(dragon ? dragon.type : "");
     const [isRemoving, setIsRemoving] = useState(false);
     const [currentMode, setCurrentMode] = useState(
         cardMode ? cardMode : "VIEW"
@@ -42,6 +42,18 @@ export default function useDragonCardState(
     const toggleRemoveMode = useCallback(() => {
         setIsRemoving(!isRemoving);
     }, [isRemoving]);
+
+    const createDragon = useCallback(
+        async (dragonData: Pick<Dragon, "name" | "type">) => {
+            try {
+                await API("", { method: "POST", payload: dragonData });
+                goToDragonList();
+            } catch (error) {
+                console.error(error);
+            }
+        },
+        [API, goToDragonList]
+    );
 
     const editDragon = useCallback(
         async (
@@ -91,6 +103,7 @@ export default function useDragonCardState(
             setCardToDefaultMode,
             isRemoving,
             toggleRemoveMode,
+            createDragon,
             editDragon,
             removeDragon,
         },

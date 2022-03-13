@@ -1,4 +1,8 @@
-import { createGlobalStyle, DefaultTheme } from "styled-components";
+import {
+    createGlobalStyle,
+    DefaultTheme,
+    MediaFactoryFunction,
+} from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
     * {
@@ -16,6 +20,10 @@ export const GlobalStyle = createGlobalStyle`
       -moz-osx-font-smoothing: grayscale;
     }
 `;
+
+const breakpointFactory =
+    (type: Parameters<MediaFactoryFunction>[0]) => (size: number) =>
+        `(${type === "up" ? "min" : "max"}-width: ${size}px)`;
 
 export const defaultTheme: DefaultTheme = {
     color: {
@@ -37,9 +45,8 @@ export const defaultTheme: DefaultTheme = {
         },
     },
     breakpoints: {
-        desktopSmall: type =>
-            `(${type === "up" ? "min" : "max"}-width: 1000px)`,
-        tablet: type => `(${type === "up" ? "min" : "max"}-width: 810px)`,
-        mobile: type => `(${type === "up" ? "min" : "max"}-width: 480px)`,
+        desktopSmall: type => breakpointFactory(type)(1000),
+        tablet: type => breakpointFactory(type)(810),
+        mobile: type => breakpointFactory(type)(480),
     },
 };

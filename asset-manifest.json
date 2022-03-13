@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.js": "/desafio-front-dragon/static/js/main.8c5bcb62.js",
+    "main.js": "/desafio-front-dragon/static/js/main.0e6128b1.js",
     "static/js/787.03d02b99.chunk.js": "/desafio-front-dragon/static/js/787.03d02b99.chunk.js",
     "static/media/dragonBg.jpeg": "/desafio-front-dragon/static/media/dragonBg.f3157c822fc6c04f5a52.jpeg",
     "static/media/dragonSpinner.png": "/desafio-front-dragon/static/media/dragonSpinner.3b581290486793a73e89.png",
     "index.html": "/desafio-front-dragon/index.html",
-    "main.8c5bcb62.js.map": "/desafio-front-dragon/static/js/main.8c5bcb62.js.map",
+    "main.0e6128b1.js.map": "/desafio-front-dragon/static/js/main.0e6128b1.js.map",
     "787.03d02b99.chunk.js.map": "/desafio-front-dragon/static/js/787.03d02b99.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.8c5bcb62.js"
+    "static/js/main.0e6128b1.js"
   ]
 }

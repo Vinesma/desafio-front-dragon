@@ -6,8 +6,10 @@ import Spinner from "components/Spinner";
 import useDragonListState from "./hooks/useDragonListState";
 
 const DragonList = () => {
-    const [{ data, loading, safeToRender }, { goToLogin, goToDragonCreation }] =
-        useDragonListState();
+    const [
+        { data, loading, safeToRender },
+        { goToLogin, goToDragonCreation, goToDragonDetail },
+    ] = useDragonListState();
 
     return (
         <Wrapper>
@@ -26,7 +28,12 @@ const DragonList = () => {
                     <DragonCard dragon={dragon}>
                         <Button.Group align="start">
                             <Button displayType="PRIMARY">Edit</Button>
-                            <Button displayType="SECONDARY">Details</Button>
+                            <Button
+                                displayType="SECONDARY"
+                                onClick={() => goToDragonDetail(dragon.id)}
+                            >
+                                Details
+                            </Button>
                             <Button displayType="TERTIARY">Remove</Button>
                         </Button.Group>
                     </DragonCard>

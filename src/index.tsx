@@ -18,12 +18,11 @@ ReactDOM.render(
                 <Routes>
                     <Route path="/" element={<App />}>
                         <Route index element={<Login />} />
-                        <Route path="dragons" element={<DragonList />}>
-                            <Route
-                                path=":dragonId"
-                                element={<DragonDetail />}
-                            />
-                        </Route>
+                        <Route path="dragons" element={<DragonList />}></Route>
+                        <Route
+                            path="dragons/:dragonId"
+                            element={<DragonDetail />}
+                        />
                         <Route
                             path="create_dragon"
                             element={<DragonCreate />}

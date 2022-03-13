@@ -1,19 +1,26 @@
 import useFetch from "hooks/useFetch";
 import Dragon from "interfaces/Dragon";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function useDragonListState() {
     const [API, { data, loading, safeToRender }] = useFetch<Dragon[]>();
     const navigate = useNavigate();
 
-    const goToLogin = () => {
+    const goToLogin = useCallback(() => {
         navigate("/");
-    };
+    }, [navigate]);
 
-    const goToDragonCreation = () => {
+    const goToDragonCreation = useCallback(() => {
         navigate("/create_dragon");
-    };
+    }, [navigate]);
+
+    const goToDragonDetail = useCallback(
+        (dragonId: Dragon["id"]) => {
+            navigate(`/dragons/${dragonId}`);
+        },
+        [navigate]
+    );
 
     useEffect(() => {
         API();
@@ -21,6 +28,6 @@ export default function useDragonListState() {
 
     return [
         { data, loading, safeToRender },
-        { goToLogin, goToDragonCreation },
+        { goToLogin, goToDragonCreation, goToDragonDetail },
     ] as const;
 }

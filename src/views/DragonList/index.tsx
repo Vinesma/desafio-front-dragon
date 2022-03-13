@@ -8,7 +8,8 @@ import useDragonListState from "./hooks/useDragonListState";
 const DragonList = () => {
     const [
         { data, loading, safeToRender },
-        { goToLogin, goToDragonCreation, goToDragonDetail },
+        { goToLogin, goToDragonCreation },
+        { fetchNewDragons },
     ] = useDragonListState();
 
     return (
@@ -25,18 +26,11 @@ const DragonList = () => {
             {loading && <Spinner />}
             {safeToRender &&
                 data?.map(dragon => (
-                    <DragonCard dragon={dragon}>
-                        <Button.Group align="start">
-                            <Button displayType="PRIMARY">Edit</Button>
-                            <Button
-                                displayType="SECONDARY"
-                                onClick={() => goToDragonDetail(dragon.id)}
-                            >
-                                Details
-                            </Button>
-                            <Button displayType="TERTIARY">Remove</Button>
-                        </Button.Group>
-                    </DragonCard>
+                    <DragonCard
+                        key={dragon.id}
+                        dragon={dragon}
+                        onSuccessfulModification={fetchNewDragons}
+                    />
                 ))}
         </Wrapper>
     );

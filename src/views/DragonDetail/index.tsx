@@ -13,7 +13,7 @@ const DragonDetail = () => {
         <Wrapper>
             {loading && <Spinner />}
             {safeToRender && (
-                <DragonCard dragon={data as Dragon}>
+                <DragonCard mode="DETAILS" dragon={data as Dragon}>
                     <Button.Group align="start">
                         <Button
                             displayType="SECONDARY"

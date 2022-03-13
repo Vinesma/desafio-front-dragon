@@ -24,7 +24,7 @@ const Wrapper = styled.div`
         width: 100%;
         height: 100%;
         border-radius: 50%;
-        background-color: ${props => props.theme.color.secondary.light}77;
+        background-color: ${props => props.theme.color.secondary.light}44;
     }
 `;
 

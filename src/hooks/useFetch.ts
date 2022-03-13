@@ -2,6 +2,7 @@ import { baseUrl } from "api/routes";
 import { useCallback, useEffect, useState } from "react";
 
 interface Options extends RequestInit {
+    payload: any;
     method: "GET" | "POST" | "PUT" | "PATCH";
 }
 type FetcherFunction = (url?: string, init?: Options) => Promise<void>;
@@ -14,6 +15,11 @@ export default function useFetch<DataType = any>() {
 
     const API: FetcherFunction = useCallback(async (url = "", init) => {
         try {
+            if (init && init.method !== "GET" && init.payload) {
+                init.headers = { "Content-Type": "application-json" };
+                init.body = JSON.stringify(init.payload);
+            }
+
             setLoading(true);
             const response = await fetch(`${baseUrl}${url}`, init);
 

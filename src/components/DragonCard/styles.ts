@@ -23,3 +23,12 @@ export const Wrapper = styled.div`
         margin-bottom: 0;
     }
 `;
+
+export const Form = styled.form`
+    width: 100%;
+
+    & > *:last-child {
+        margin-top: 1rem;
+        margin-bottom: 0;
+    }
+`;

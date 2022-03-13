@@ -22,12 +22,17 @@ export default function useDragonListState() {
         [navigate]
     );
 
-    useEffect(() => {
+    const fetchNewDragons = useCallback(() => {
         API();
     }, [API]);
+
+    useEffect(() => {
+        fetchNewDragons();
+    }, [fetchNewDragons]);
 
     return [
         { data, loading, safeToRender },
         { goToLogin, goToDragonCreation, goToDragonDetail },
+        { fetchNewDragons },
     ] as const;
 }

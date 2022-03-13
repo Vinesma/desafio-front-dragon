@@ -27,9 +27,7 @@ const Login = () => {
                     />
                 </Input.Group>
                 <Button.Group>
-                    <Button displayType="SECONDARY" type="submit">
-                        Login
-                    </Button>
+                    <Button type="submit">Login</Button>
                 </Button.Group>
                 {invalidLogin && <p>Invalid login! Please try again.</p>}
             </Form>

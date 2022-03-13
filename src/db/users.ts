@@ -1,6 +1,6 @@
 export const users = [
     {
-        email: "test@dragonpal.com",
+        email: "user@dragonpal.com",
         password: "pass1",
     },
 ];

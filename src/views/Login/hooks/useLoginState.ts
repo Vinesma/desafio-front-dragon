@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { users } from "db/users";
+import useGoToPage from "hooks/useGoToPage";
 
 type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
 type FormEvent = React.FormEvent<HTMLFormElement>;
@@ -9,7 +9,7 @@ export default function useLoginState() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [invalidLogin, setInvalidLogin] = useState(false);
-    const navigate = useNavigate();
+    const [{ goToDragonList }] = useGoToPage();
 
     const loginIsValid = useCallback((_email, _password) => {
         for (const user of users) {
@@ -22,18 +22,18 @@ export default function useLoginState() {
         return false;
     }, []);
 
-    const goToDragonList = useCallback(
+    const login = useCallback(
         (event: FormEvent) => {
             event.preventDefault();
             if (loginIsValid(email, password)) {
                 localStorage.setItem("user", email);
                 setInvalidLogin(false);
-                navigate("/dragons");
+                goToDragonList();
             } else {
                 setInvalidLogin(true);
             }
         },
-        [navigate, email, password, loginIsValid]
+        [goToDragonList, email, password, loginIsValid]
     );
 
     return [
@@ -47,7 +47,6 @@ export default function useLoginState() {
             onChange: (e: ChangeEvent) => setPassword(e.target.value),
             onBlur: () => setInvalidLogin(false),
         },
-        { invalidLogin },
-        { goToDragonList },
+        { invalidLogin, login },
     ] as const;
 }

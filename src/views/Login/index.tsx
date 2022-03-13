@@ -6,12 +6,12 @@ import useLoginState from "./hooks/useLoginState";
 import { Form, Wrapper } from "./styles";
 
 const Login = () => {
-    const [emailProps, passwordProps, { invalidLogin }, { goToDragonList }] =
+    const [emailProps, passwordProps, { login, invalidLogin }] =
         useLoginState();
 
     return (
         <Wrapper>
-            <Form onSubmit={goToDragonList}>
+            <Form onSubmit={login}>
                 <Heading type="h2" center>
                     DragonPal
                 </Heading>

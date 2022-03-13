@@ -1,8 +1,8 @@
 import { useCallback, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import useGoToPage from "./useGoToPage";
 
 export default function useProtectedRoute() {
-    const navigate = useNavigate();
+    const [{ goToLogin }] = useGoToPage();
 
     const isLoggedIn = useCallback(() => {
         const user = localStorage.getItem("user");
@@ -13,9 +13,9 @@ export default function useProtectedRoute() {
 
     useEffect(() => {
         if (!isLoggedIn()) {
-            navigate("/");
+            goToLogin();
         }
-    }, [navigate, isLoggedIn]);
+    }, [goToLogin, isLoggedIn]);
 
     return isLoggedIn();
 }

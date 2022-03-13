@@ -1,7 +1,7 @@
 import useFetch from "hooks/useFetch";
+import useGoToPage from "hooks/useGoToPage";
 import Dragon from "interfaces/Dragon";
 import { useCallback, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 export type CardMode = "VIEW" | "EDIT" | "DETAILS" | "CREATE";
 type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
@@ -18,18 +18,7 @@ export default function useDragonCardState(
     );
     const [defaultMode] = useState(cardMode ? cardMode : "VIEW");
     const [API] = useFetch();
-    const navigate = useNavigate();
-
-    const goToDragonDetail = useCallback(
-        (dragonId: Dragon["id"]) => {
-            navigate(`/dragons/${dragonId}`);
-        },
-        [navigate]
-    );
-
-    const goToDragonList = useCallback(() => {
-        navigate("/dragons");
-    }, [navigate]);
+    const [{ goToDragonList }] = useGoToPage();
 
     const setCardMode = useCallback((newMode: CardMode) => {
         setCurrentMode(newMode);
@@ -96,7 +85,6 @@ export default function useDragonCardState(
             value: type,
             onChange: (e: ChangeEvent) => setType(e.target.value),
         },
-        { goToDragonDetail, goToDragonList },
         {
             currentMode,
             setCardMode,

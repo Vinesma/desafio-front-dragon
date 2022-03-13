@@ -2,6 +2,7 @@ import Button from "components/Form/Button";
 import Input from "components/Form/Input";
 import Heading from "components/Typography/Heading";
 import Text from "components/Typography/Text";
+import useGoToPage from "hooks/useGoToPage";
 import Dragon from "interfaces/Dragon";
 import DragonInfo from "./components/DragonInfo";
 import useDragonCardState, { CardMode } from "./hooks/useDragonCardState";
@@ -31,7 +32,6 @@ const DragonCard: React.FC<PropsCreate | PropsNoCreate> = ({
     const [
         nameInputProps,
         typeInputProps,
-        { goToDragonDetail, goToDragonList },
         {
             currentMode,
             setCardMode,
@@ -43,6 +43,7 @@ const DragonCard: React.FC<PropsCreate | PropsNoCreate> = ({
             removeDragon,
         },
     ] = useDragonCardState(dragon, mode);
+    const [{ goToDragonList, goToDragonDetail }] = useGoToPage();
 
     switch (currentMode) {
         case "CREATE":

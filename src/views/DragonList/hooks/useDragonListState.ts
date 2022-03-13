@@ -1,29 +1,18 @@
 import useFetch from "hooks/useFetch";
+import useGoToPage from "hooks/useGoToPage";
 import useProtectedRoute from "hooks/useProtectedRoute";
 import Dragon from "interfaces/Dragon";
 import { useCallback, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 export default function useDragonListState() {
     const [API, { data, loading, safeToRender }] = useFetch<Dragon[]>();
-    const navigate = useNavigate();
     const isLoggedIn = useProtectedRoute();
+    const [{ goToLogin }] = useGoToPage();
 
     const logout = useCallback(() => {
         localStorage.removeItem("user");
-        navigate("/");
-    }, [navigate]);
-
-    const goToDragonCreation = useCallback(() => {
-        navigate("/create_dragon");
-    }, [navigate]);
-
-    const goToDragonDetail = useCallback(
-        (dragonId: Dragon["id"]) => {
-            navigate(`/dragons/${dragonId}`);
-        },
-        [navigate]
-    );
+        goToLogin();
+    }, [goToLogin]);
 
     const fetchNewDragons = useCallback(() => {
         const params = new URLSearchParams({
@@ -42,7 +31,6 @@ export default function useDragonListState() {
 
     return [
         { data, loading, safeToRender, isLoggedIn },
-        { goToDragonCreation, goToDragonDetail },
         { fetchNewDragons, logout },
     ] as const;
 }

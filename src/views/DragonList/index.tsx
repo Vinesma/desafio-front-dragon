@@ -4,13 +4,14 @@ import Button from "components/Form/Button";
 import DragonCard from "components/DragonCard";
 import Spinner from "components/Spinner";
 import useDragonListState from "./hooks/useDragonListState";
+import useGoToPage from "hooks/useGoToPage";
 
 const DragonList = () => {
     const [
         { data, loading, safeToRender, isLoggedIn },
-        { goToDragonCreation },
         { fetchNewDragons, logout },
     ] = useDragonListState();
+    const [{ goToDragonCreation }] = useGoToPage();
 
     if (isLoggedIn) {
         return (
